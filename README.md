@@ -19,7 +19,7 @@
 </p>
 
 Drost Community Edition is the public release of **Drost-v1**: one Kali-based
-Docker image containing an MCP server, 107 executable-backed security tools,
+Docker image containing an MCP server, 109 executable-backed security tools,
 GNU grep and jq for engagement artifact analysis, and 64 Drost-native execution,
 engagement, API, HTTP, browser, blockchain, security, and workflow tools for
 agent-driven and operator-driven security work.
@@ -59,7 +59,7 @@ the original Drost foundation.
 
 ## What is included
 
-- **171 offensive-security MCP tools:** 107 executable-backed tools and 64
+- **173 offensive-security MCP tools:** 109 executable-backed tools and 64
   Drost-native execution, engagement, API, HTTP, browser, blockchain, security,
   and workflow tools. The catalog includes grep, jq, Bash, Python, browser
   automation, EVM and Solidity analysis, and persistent engagement workspaces.
@@ -67,7 +67,7 @@ the original Drost foundation.
   Kali-based image.
 - **Direct stdio transport:** no HTTP API, listening port, or separate worker
   service.
-- **Full MCP mode by default:** all 171 named tools are advertised directly so
+- **Full MCP mode by default:** all 173 named tools are advertised directly so
   the model can select recognizable tools such as `drost_nmap`,
   `drost_httpx`, and `drost_nuclei`.
 - **Persistent isolated engagements:** the server generates a random engagement
@@ -90,7 +90,7 @@ The executable-backed catalog includes:
 | Family | Tools | Examples |
 | --- | ---: | --- |
 | Network | 10 | Nmap, RustScan, Masscan, tcpdump, TShark |
-| Enumeration and OSINT | 16 | Amass, Subfinder, enum4linux-ng, NetExec |
+| Enumeration and OSINT | 17 | Amass, Subfinder, enum4linux-ng, NetExec, FOFA |
 | Web and API | 30 | Nuclei, HTTPX, FFUF, SQLMap, Katana, Dalfox |
 | Credentials | 8 | Hydra, John the Ripper, Hashcat |
 | Exploitation | 3 | Metasploit, Msfvenom, SearchSploit |
@@ -98,7 +98,15 @@ The executable-backed catalog includes:
 | Forensics | 11 | Volatility, Foremost, ExifTool, Sleuth Kit |
 | Cloud, containers, and IaC | 8 | Prowler, Trivy, Checkov, kube-bench |
 | Wireless | 5 | Aircrack-ng, Airmon-ng, Airodump-ng, Kismet |
+| Android | 1 | `drost-android` over adb, Apktool, JADX, and mitmproxy |
 | Utilities | 2 | GNU grep, jq |
+
+Two entries are container-local Python front ends rather than third-party
+binaries: `drost_android` (Android device control, APK triage, and HTTPS
+interception through adb, Apktool, JADX, and mitmproxy) and `drost_fofa` (the
+FOFA internet-wide asset index, which requires `FOFA_KEY` in the container
+environment). Neither is part of the Drost-native tool set; both are advertised
+as executable-backed catalog entries.
 
 Drost-native tools add Bash and Python execution, filtered catalog discovery,
 workspace operations, evidence-backed OpenAPI, GraphQL, JWT and API fuzz
@@ -314,7 +322,7 @@ Restart Tess after registration. Then ask it to call `drost_catalog`, choose
 an authorized tool, create an engagement with `drost_engagement_create`, and
 use the returned `engagement_id` for the engagement's tool calls.
 
-Full mode is the default. It exposes all 171 MCP tools directly and requires no
+Full mode is the default. It exposes all 173 MCP tools directly and requires no
 mode environment variable.
 
 ## Connect agent runtimes
@@ -449,7 +457,7 @@ enforces a strict tool-schema limit:
 docker exec -i -e DROST_MCP_MODE=compact drost-ai drost-mcp
 ```
 
-Compact mode advertises 64 Drost-native tools instead of all 171 schemas. The
+Compact mode advertises 64 Drost-native tools instead of all 173 schemas. The
 complete executable catalog remains available
 indirectly through `drost_catalog` and `drost_execute`, but direct names such as
 `drost_nmap` are not advertised to the model.

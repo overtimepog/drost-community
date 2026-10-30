@@ -51,6 +51,7 @@ TOOL_GROUPS: dict[str, tuple[tuple[str, str], ...]] = {
         ("sherlock", "sherlock"),
         ("shodan", "shodan"),
         ("censys", "censys"),
+        ("fofa", "drost-fofa"),
     ),
     "web": (
         ("gobuster", "gobuster"),
@@ -145,6 +146,9 @@ TOOL_GROUPS: dict[str, tuple[tuple[str, str], ...]] = {
         ("aireplay", "aireplay-ng"),
         ("kismet", "kismet"),
     ),
+    "android": (
+        ("android", "drost-android"),
+    ),
     "utilities": (
         ("grep", "grep"),
         ("jq", "jq"),
@@ -160,6 +164,16 @@ SPECIAL_DESCRIPTIONS = {
     "jq": (
         "Parse, query, transform, and validate JSON inside the selected engagement with jq. "
         "Use this instead of brittle regular expressions for JSON and OpenAPI documents."
+    ),
+    "android": (
+        "Debug Android devices and applications with adb, APK decompilation, Frida, "
+        "objection, and mitmproxy. Use drost_android for device control, APK triage, "
+        "dynamic instrumentation, and HTTPS interception."
+    ),
+    "fofa": (
+        "Search the FOFA internet-wide asset index with FOFA query syntax, retrieve "
+        "per-host service records, aggregate results by field, and check account quota. "
+        "Requires the FOFA_KEY environment variable in the container."
     ),
 }
 
