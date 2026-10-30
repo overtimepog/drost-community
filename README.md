@@ -98,15 +98,20 @@ The executable-backed catalog includes:
 | Forensics | 11 | Volatility, Foremost, ExifTool, Sleuth Kit |
 | Cloud, containers, and IaC | 8 | Prowler, Trivy, Checkov, kube-bench |
 | Wireless | 5 | Aircrack-ng, Airmon-ng, Airodump-ng, Kismet |
-| Android | 1 | `drost-android` over adb, Apktool, JADX, and mitmproxy |
+| Android | 1 | `drost-android` for adb device control, APK triage, and HTTPS interception |
 | Utilities | 2 | GNU grep, jq |
 
 Two entries are container-local Python front ends rather than third-party
-binaries: `drost_android` (Android device control, APK triage, and HTTPS
-interception through adb, Apktool, JADX, and mitmproxy) and `drost_fofa` (the
-FOFA internet-wide asset index, which requires `FOFA_KEY` in the container
-environment). Neither is part of the Drost-native tool set; both are advertised
-as executable-backed catalog entries.
+binaries: `drost_android` (device control, APK triage, decompilation, and HTTPS
+interception) and `drost_fofa` (the FOFA internet-wide asset index, which
+requires `FOFA_KEY` in the container environment). Neither is part of the
+Drost-native tool set; both are advertised as executable-backed catalog entries.
+
+`drost_android` drives whichever Android tooling is present in the image it runs
+in — adb, Apktool, JADX, frida, objection, and mitmproxy — and refuses with an
+explicit "required command not found" error when one is absent. Run
+`drost-android doctor` to see exactly what the current image provides rather
+than assuming a fixed set.
 
 Drost-native tools add Bash and Python execution, filtered catalog discovery,
 workspace operations, evidence-backed OpenAPI, GraphQL, JWT and API fuzz
